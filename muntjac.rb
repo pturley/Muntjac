@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 old_repo = File.read("repo.txt") if File.exists?("repo.txt")
 print "Where is your repository#{' ('+old_repo+')' if old_repo}? "
 repo = gets.chomp
