@@ -9,9 +9,9 @@ def display_help?
 end
 
 if display_help?
-  puts "Useage: git muntjac [<team>]"
+  puts "Usage: git muntjac [<team>]"
   puts
-  puts "        <team> : comma separated regular expresions of team members"
+  puts "        <team> : comma separated regular expressions of team members"
   exit 0
 end
 
