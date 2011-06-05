@@ -1,19 +1,18 @@
 #!/usr/bin/env ruby
 
-old_repo = File.read("repo.txt") if File.exists?("repo.txt")
-print "Where is your repository#{' ('+old_repo+')' if old_repo}? "
-repo = gets.chomp
-repo = old_repo if repo.empty?
-File.open("repo.txt", "wb") { |file| file << repo }
+if ARGV.length > 1 || (ARGV.length == 0 && !File.exists?(".git/team.txt"))
+  puts "Useage: git muntjac [<team>]"
+  puts 
+  puts "        <team> : comma separated regular expresions of team members"
+  exit 0
+end
 
-old_team = File.read("team.txt") if File.exists?("team.txt")
-print "Who is on your team comma separated or regexp#{' ('+old_team+')' if old_team}? "
-team = gets.chomp
-team = old_team if team.empty?
-File.open("team.txt", "wb") { |file| file << team }
+old_team = File.read(".git/team.txt") if File.exists?(".git/team.txt")
+team = ARGV[0] if ARGV[0]
+team ||= old_team
+File.open(".git/team.txt", "wb") { |file| file << team }
 
-
-full_log = `cd #{repo} && git log`
+full_log = `git log`
 commits = full_log.split(/^commit/)
 
 matched_commits = []
