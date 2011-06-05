@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-git_location = `which git`.chomp
-git_location.gsub!(/\/git$/, "")
+git = `which git`.chomp.gsub(/\/git$/, "")
+muntjac_src = File.expand_path 'muntjac.rb'
+git_muntjac = git + '/git-muntjac'
 
-`ln -s #{File.expand_path 'muntjac.rb'} #{git_location+'/git-muntjac'}`
+`ln -s #{muntjac_src} #{git_muntjac}`
