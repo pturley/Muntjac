@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
 
-def should_print_useage?
+def should_print_usage?
   ARGV.length > 1 || (ARGV.length == 0 && !File.exists?(".git/team.txt"))
 end
 
-def print_useage
-  puts "Useage: git muntjac [<team>]"
+def print_usage
+  puts "Usage: git muntjac [<team>]"
   puts 
-  puts "        <team> : comma separated regular expresions of team members"
+  puts "        <team> : comma separated regular expressions of team members"
   exit 0
 end
 
@@ -33,5 +33,5 @@ def find_matched_commits(team_members, commits)
   matched_commits
 end
 
-print_useage if should_print_useage?
+print_usage if should_print_usage?
 puts find_matched_commits(team, all_commits)
