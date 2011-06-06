@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+TEAM_FILE = ".git/team.txt"
+
 def should_print_usage?
   ARGV.length > 1 || (ARGV.length == 0 && !File.exists?(".git/team.txt"))
 end
@@ -12,10 +14,11 @@ def print_usage
 end
 
 def team
-  old_team = File.read(".git/team.txt") if File.exists?(".git/team.txt")
+
+  old_team = File.read(TEAM_FILE) if File.exists?(TEAM_FILE)
   team_members = ARGV[0] if ARGV[0]
   team_members ||= old_team
-  File.open(".git/team.txt", "wb") { |file| file << team_members }
+  File.open(TEAM_FILE, "wb") { |file| file << team_members }
   puts "Processing repo for team: #{team_members}"
   puts
   team_members
@@ -28,9 +31,11 @@ end
 def find_matched_commits(team_members, commits)
   matched_commits = []
   team_members.split(",").each do |team_member|
-    commits.each {|commit| matched_commits << "commit #{commit}" if Regexp.new(team_member.strip, true).match(commit) }
+    commits.each do |commit| 
+      matched_commits << "commit #{commit}" if Regexp.new(team_member.strip, true).match(commit)
+    end
   end
-  matched_commits
+  matched_commits.uniq
 end
 
 print_usage if should_print_usage?
