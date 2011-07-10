@@ -14,7 +14,6 @@ def print_usage
 end
 
 def team
-
   old_team = File.read(TEAM_FILE) if File.exists?(TEAM_FILE)
   team_members = ARGV[0] if ARGV[0]
   team_members ||= old_team
@@ -30,8 +29,8 @@ end
 
 def find_matched_commits(team_members, commits)
   matched_commits = []
-  team_members.split(",").each do |team_member|
-    commits.each do |commit| 
+  commits.each do |commit| 
+    team_members.split(",").each do |team_member|
       matched_commits << "commit #{commit}" if Regexp.new(team_member.strip, true).match(commit)
     end
   end
