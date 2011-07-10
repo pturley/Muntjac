@@ -1,9 +1,12 @@
 Muntjac is a tool that helps technical leaders on large projects see only the commits of their team members in a shared git repository.
 
-To install Muntjac, just run install.rb.  You will need to have ruby installed, but thats it!
+To install Muntjac, just run 
+
+  sudo ruby install.rb
+
+You will need to have ruby installed, but thats it!
 
 To use Muntjac, go to any git repo and type "git muntjac <team>" where <team> is a comma separated list of your team members.  After that first run, Muntjac will remember those team members and will default to them with just "git muntjac".  Voila!!!
-
 
 Why Muntjac?
 Well, the muntjac is a barking deer whos dung is harvested to make coffee.  Similarly to our project, the muntjac deer eats many coffee beans, but only outputs the good ones.
