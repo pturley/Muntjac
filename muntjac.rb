@@ -31,10 +31,18 @@ def find_matched_commits(team_members, commits)
   matched_commits = []
   commits.each do |commit| 
     team_members.split(",").each do |team_member|
-      matched_commits << "commit #{commit}" if Regexp.new(team_member.strip, true).match(commit)
+      matched_commits << colored_commit(commit) if Regexp.new(team_member.strip, true).match(commit)
     end
   end
   matched_commits.uniq
+end
+
+def colored_commit(commit)
+  sha = commit.split("\n").first
+  other_commit_lines = commit.split("\n").drop(1)
+  sha_line = "\e[0;33mcommit #{sha}\e[0;37m"
+
+  [sha_line, other_commit_lines].flatten.join("\n")
 end
 
 print_usage if should_print_usage?
